@@ -1,14 +1,29 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
+import { reactive } from 'vue';
+
+const state = reactive({
+  likes: 0
+});
+
+const addLike = () => {
+  if (state.likes < 10) {
+    state.likes++
+  } else {
+    alert("cant go any further")
+  }
+}
 </script>
 
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld msg="Hello Josua !" />
+    <div class="wrapper" @click="addLike" >
+      <!-- <button @click="state.likes++"></button> -->
+      <p>{{ state.likes }}</p>
+      <HelloWorld :msg= "state.likes.toString()"/>
     </div>
   </header>
 
@@ -16,6 +31,8 @@ import TheWelcome from './components/TheWelcome.vue'
     <TheWelcome />
   </main>
 </template>
+
+
 
 <style scoped>
 header {
